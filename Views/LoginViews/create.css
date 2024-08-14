@@ -1,0 +1,434 @@
+.sign-up-EJ {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .sign-up-EJ .overlap-wrapper {
+    background-color: #212020;
+    width: 100%;
+  }
+  
+  .sign-up-EJ .overlap {
+    position: relative;
+    height: 100vh;
+    background-image: url(/LoginMedia/create-account/background.png);
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+  
+  .sign-up-EJ .rectangle {
+    position: absolute;
+    width: 50%;
+    height: 90%;
+    top: 5%;
+    left: 10%;
+    background-color: #ecb5a2;
+    border-radius: 20px;
+    opacity: 0.85;
+  }
+  
+  .sign-up-EJ .terms {
+    position: absolute;
+    width: 50%;
+    height: 6%;
+    top: 78%;
+    left: 12%;
+  }
+  
+  .sign-up-EJ .by-continuing-you {
+    position: absolute;
+    width: 90%;
+    top: 30%;
+    left: 0%;
+    font-family: Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 22px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .sign-up-EJ .create-account {
+    position: absolute;
+    width: 25%;
+    height: 6%;
+    top: 87%;
+    left: 22%;
+    background-color: #4384e5;
+    border-radius: 10px;
+    color: azure;
+    font-size: 25px;
+    border: none;
+    transition: transform 0.3s;
+  }
+
+  .sign-up-EJ .create-account:hover {
+    transform: scale(1.1); /* Scale up on hover */
+    transition: transform 0.3s; /* Add a smooth transition for the scale */
+    box-shadow: 0 10px 10px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .sign-up-EJ .confirm-password {
+    position: absolute;
+    width: 48%;
+    top: 69%;
+    left: 10.75%;
+  }
+  
+  .sign-up-EJ .overlap-group-username {
+    position: relative;
+    width: 100%;
+    height: 55px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+  }
+
+  .sign-up-EJ .overlap-group-confirm-password {
+    position: relative;
+    width: 100%;
+    height: 55px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+  }
+  
+  .sign-up-EJ .text-wrapper input[type="password"] {
+    position: absolute;
+    width: 80%;
+    top: 17%;
+    left: 2%;
+    font-family: "Kalam", cursive;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  input {
+    background-color: #d9d9d9;
+    border: none;
+    outline: none;
+    width: 90%;
+  }
+  
+  .sign-up-EJ .eye {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    top: 10px;
+    left: 88%;
+    background-image: url(/images/EyeHide.png);
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    background-color: #d9d9d9;
+  }
+  
+  .sign-up-EJ .password {
+    position: absolute;
+    width: 48%;
+    height: 93px;
+    top: 56%;
+    left: 10.75%;
+  }
+  
+  .sign-up-EJ .overlap-group-password {
+    position: absolute;
+    width: 100%;
+    height: 55px;
+    top: 0;
+    left: 0;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+  }
+  
+  .sign-up-EJ .text-wrapper-2 input[type="password"]{
+    position: absolute;
+    width: 80%;
+    top: 17%;
+    left: 2%;
+    font-family: "Kalam", cursive;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .sign-up-EJ .p {
+    position: absolute;
+    width: 100%;
+    top: 61px;
+    left: 3%;
+    font-family: "Kalam-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .sign-up-EJ .username {
+    position: absolute;
+    width: 48%;
+    height: 55px;
+    top: 45%;
+    left: 10.75%;
+  }
+  
+  .sign-up-EJ .text-wrapper-3 input[type="email"]{
+    position: absolute;
+    width: 90%;
+    top: 17%;
+    left: 2%;
+    font-family: "Kalam", cursive;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .sign-up-EJ .div-wrapper {
+    position: relative;
+    width: 100%;
+    height: 55px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+  }
+  
+  .sign-up-EJ .text-wrapper-4 {
+    position: absolute;
+    top: 17%;
+    left: 4%;
+    width: 90%;
+    font-family: "Kalam", cursive;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .sign-up-EJ .overlap-2 {
+    position: relative;
+    width: 100%;
+    height: 55px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+  }
+  
+  .sign-up-EJ .text-wrapper-5 {
+    position: absolute;
+    top: 17%;
+    left: 4%;
+    width: 70%;
+    font-family: "Kalam", cursive;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  /* Style the date input */
+  .sign-up-EJ .text-wrapper-5 input[type="date"] {
+    /* Add your desired styles here */
+    /* For example, you can set the border, font size, or any other properties you want */
+    font-size: 24px;
+  }
+  
+  .sign-up-EJ .last-name {
+    position: absolute;
+    width: 48%;
+    height: 55px;
+    top: 34%;
+    left: 10.75%;
+  }
+  
+  .sign-up-EJ .overlap-3 {
+    position: relative;
+    height: 55px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+  }
+  
+  .sign-up-EJ .text-wrapper-6 {
+    position: absolute;
+    width: 85%;
+    top: 17%;
+    left: 2%;
+    font-family: "Kalam", cursive;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .sign-up-EJ .overlap-4 {
+    position: relative;
+    height: 55px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+  }
+  
+  .sign-up-EJ .text-wrapper-7 {
+    position: absolute;
+    width: 60%;
+    top: 17%;
+    left: 2%;
+    font-family: "Kalam", cursive;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .sign-up-EJ .first-name {
+    position: absolute;
+    width: 48%;
+    height: 55px;
+    top: 23%;
+    left: 10.75%;
+  }
+  
+  .sign-up-EJ .overlap-5 {
+    position: relative;
+    height: 55px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+  }
+  
+  .sign-up-EJ .header-title {
+    position: absolute;
+    top: 7%;
+    font-family: "Concert One", cursive;
+    font-weight: 400;
+    color: #000000;
+    font-size: 84px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  .sign-up-EJ .text-wrapper-8 {
+    position: absolute;
+    width: 50%;
+    height: 6%;
+    top: 7%;
+    left: 17%;
+  }  
+
+  .ps {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+  }
+
+  .weak {
+    color: red;
+    font-weight: bold;
+    font-family: 'Josefin Sans', sans-serif;;
+    font-size: 23px;
+  }
+
+  .average {
+    color: yellow;
+    font-weight: bold;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 23px;
+  }
+
+  .strong {
+    color: rgb(50, 202, 68);
+    font-weight: bold;
+    font-family: 'Kalam';
+    font-size: 23px;
+  }
+
+  /* Style the error messages container */
+.error-messages {
+  display: none;
+  border: 2px solid red;
+  background-color: #ffeeee;
+  position: absolute;
+  top: 70%;
+  color: red;
+  padding: 10px;
+  right: 10%;
+  width: 20%;
+  font-family: 'Kalam', cursive;
+  border-radius: 5px;
+}
+
+/* Style each error message */
+.error-message {
+  margin-bottom: 5px;
+}
+
+/* Style the error messages to be more prominent */
+.error-messages p {
+  margin: 0;
+  padding: 0;
+}
+
+.sign-up-EJ .requirements {
+  position: absolute;
+  width: 30%;
+  height: 35%;
+  top: 19%;
+  right: 5%;
+  background-color: #eccba2;
+  border-radius: 20px;
+  opacity: 0.80;
+}
+
+.sign-up-EJ .rules {
+  position: absolute;
+  width: 37%;
+  height: 6%;
+  top: 19%;
+  right: 0%;
+}
+
+.sign-up-EJ .list {
+  position: absolute;
+  width: 90%;
+  top: 30%;
+  left: 0%;
+  font-family: Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 22px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.eye-button {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  top: 10px;
+  left: 88%;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  background-color: #d9d9d9;
+}
+
+.input-field {
+  position: absolute;
+  width: 80%;
+  top: 17%;
+  left: 2%;
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  color: black;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: normal;
+}

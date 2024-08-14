@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Konva Canvas Library -->
+    <script src="https://unpkg.com/konva@9.2.3/konva.min.js"></script>
+
+    <!-- Test gif images with gifler -->
+    <script src="https://unpkg.com/gifler@0.1.0/gifler.min.js"></script>
+
+    <!-- CSS stuff -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Animated Backdrop -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+          prefix: "tw-",
+          corePlugins: {
+            preflight: false,
+          }
+      }
+    </script>
+
+    <!-- Google font API -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google font for the heading -->
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Hubballi&family=Josefin+Sans:ital,wght@1,200&family=Kaisei+Decol:wght@500&family=Kalam:wght@300;700&family=Oswald&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Seaweed Script' rel='stylesheet'>
+    
+    <!-- Uncomment line 15 for node -->
+    <link rel="stylesheet" href="/EditorViews/editor.css" />
+
+    <!-- CSS stuff -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Java Script stuff-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Dropdowns, Popovers, Tolltips -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- JS files -->
+    <script type="module" src="/EditorController.mjs"></script>
+
+    <!-- Added this for the Ajax server calls -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Added for row dragging -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+    <!-- Dymic CSS file for overlay styles -->
+    <link rel="stylesheet" id="overlayOptionCSS"></link>
+
+    <!-- Tab logo -->
+<!-- Path to file-->    
+    <link rel="icon" href="/mic.png">
+    <title>Editor Page</title>
+</head>
+<body style="background-color:#ecb5a2;">
+    <div class="editor">
+        <div class="bootstrap-table">
+            <div class="headers-tab">
+                <table class="table table-borderless" style="width: 10%;">
+                    <thead>
+                        <!-- clicking options -->
+                        <tr> 
+                            <th scope="col">
+                                <div class="dropdown">
+                                    <button class="btn" type="button" data-toggle="dropdown">File
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                      <li><a href="#">New</a></li>
+                                      <li><a href="#">Delete Project</a></li>
+                                      <li><a href="#">Open/Load Existing Project</a></li>
+                                      <li><a href="#">Open Project in New Window</a></li>
+                                      <li><a href="#">Open Project in This Window</a></li>
+                                      <li><a href="#">Make Copy</a></li>
+                                      <li><a href="#" id="saveToDB_Button">Save</a></li>
+                                      <li><a href="#">Autosave</a></li>
+                                    </ul>
+                                </div>
+                            </th>
+
+                            <th id="edit" scope="col">
+                                <div class="dropdown">
+                                    <button class="btn" type="button" data-toggle="dropdown">Edit
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Change Title</a></li>
+                                        <li><a href="#">Undo</a></li>
+                                        <li><a href="#">Redo</a></li>
+                                        <li><a href="#">Discard Changes</a></li>
+                                    </ul>
+                            </th>
+                            
+                            <th id="view" scope="col"><div class="dropdown">
+                                <button class="btn" type="button" data-toggle="dropdown">View
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Display Hierarchy</a></li>
+                                    <li><a href="#">Display Drag and Drop Option</a></li>
+                                    <li><a href="#">Hide or Show Timeline</a></li>
+                                    <li><a id="fullScreen">Fullscreen</a></li>
+                                    <li><a href="#">Change Theme</a></li>
+                                    <hr>
+                                    <li><a id="playVideo">Play Video</a></li>
+                                    <li><a id="pauseVideo">Pause Video</a></li>
+                                    <li><a id="restartVideo">Restart Video</a></li>
+                                </ul>
+                        </th>
+                        
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+              <div class="context-table">
+                  <table class="table table-white">
+                      <tbody>
+                          <tr>
+                              <!-- Hierarchy Column -->
+                                  <td style="background-color: lightslategray; width: 15%;">
+                                      <!-- Hierarchy -->
+                                      <div class="accordion" id="accordionExample" style="width: 12rem;">
+                                          
+                                          <!-- Heading one for the logo tab in the hierarchy -->
+                                          <div class="card">
+                                            <div class="card-header" id="headingOne">
+                                              <h5 class="mb-0">
+                                                <button class="btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                  Logo
+                                                </button>
+                                                <input type="image" src="/EditorMedia/Plus.png" width="20" height="20" data-bs-toggle="modal" data-bs-target="#logoModal" id="logoPlusButton">
+                                              </h5>
+                                              <div class="modal fade" id="logoModal" tabindex="-1" aria-labelledby="logoModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h5 class="modal-title" id="logoModalLabel">Add Properties of Logo</h5>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                      </div>
+                                                      
+                                                      <div class="modal-body"> 
+                                                          <b>Name:</b><br>
+                                                            <input type="text" name="logoName" id="logoName"  onclick="disableKeyboardListner()" onfocusout="createKeyboardListener()">
+                                                            <br><br>
+
+                                                          <b>Image Upload: </b><br>
+                                                            <input type="file" id="logoInput" accept="image/*">
+                                                            <br><br>
+                                                          
+                                                          <b>Width:</b><br> 
+                                                          <input type="number" name="logoWidth" id="logoWidth" value="1" min="1" max="1050" required>
+                                                          <input type="range" class="logoWidthRange" min="1" max="1050" value="1" step="1">
+                                                          <br><br> 
+                                                          
+                                                          <b>Height:</b><br> 
+                                                          <input type="number" name="logoHeight" id="logoHeight" value="1" min="1" max="500" required>
+                                                          <input type="range" class="logoHeightRange" min="1" max="500" value="1" step="1">
+                                                          <br><br>
+
+                                                          <b>Opacity:</b><br>
+                                                          <div class="block">
+                                                            <input type="range" name="logoOpacity" id="logoOpacity" min="0" max="1" value="1" step="0.1" list="logoMarkers"> 
+                                                            <label id="logoOpacityValue"></label> 
+                                                          </div>
+                                                          <br>
+
+                                                          <!-- Used to update the label to reflect what value you are at on the range -->
+                                                          <script>
+                                                            //Logo width and height range 
+                                                            var logoWidthRange = document.querySelector('.logoWidthRange');
+                                                            var logoWidthNum = document.getElementById("logoWidth");
+
+                                                            logoWidthRange.addEventListener('input', function(e){
+                                                              logoWidthNum.value = e.target.value;
+                                                            });
+
+                                                            logoWidthNum.addEventListener('input', function(e){
+                                                              logoWidthRange.value = e.target.value;
+                                                            });
+
+                                                            var logoHeightRange = document.querySelector('.logoHeightRange');
+                                                            var logoHeightNum = document.getElementById("logoHeight");
+
+                                                            logoHeightRange.addEventListener('input', function(e){
+                                                              logoHeightNum.value = e.target.value;
+                                                            });
+
+                                                            logoHeightNum.addEventListener('input', function(e){
+                                                              logoHeightRange.value = e.target.value;
+                                                            });
+                                                            //*******Logo Opacity section********
+                                                            const logoOpacityOutput = document.getElementById("logoOpacityValue");
+                                                            const logoOpacityInput = document.getElementById("logoOpacity");
+
+                                                            //Have label display the starting value
+                                                            logoOpacityOutput.innerText = logoOpacityInput.value;
+
+                                                            // When you move to a diffrent value in the range update the label to current value
+                                                            logoOpacityInput.addEventListener("input", (event) => {
+                                                              logoOpacityOutput.innerText = event.target.value;
+                                                            });
+
+                                                          </script>
+
+                                                          <!-- Used to add tick marks at every o.1 point -->
+                                                          <datalist id="logoMarkers">
+                                                            <option value="0"></option>
+                                                            <option value="0.1"></option>
+                                                            <option value="0.2"></option>
+                                                            <option value="0.3"></option>
+                                                            <option value="0.4"></option>
+                                                            <option value="0.5"></option>
+                                                            <option value="0.6"></option>
+                                                            <option value="0.7"></option>
+                                                            <option value="0.8"></option>
+                                                            <option value="0.9"></option>
+                                                            <option value="1"></option>
+                                                          </datalist>
+                                                      </div>
+
+                                                      <div class="modal-footer"> 
+                                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                                          <button type="button" data-toggle="modal" data-target="#uploadLogoModal" class="btn btn-primary">
+                                                            Save Changes
+                                                          </button>
+                    
+                                                          <!-- Modal -->
+                                                            <div class="modal fade" id="uploadLogoModal" tabindex="-1" role="dialog" aria-labelledby="uploadLogoModalLabel" aria-hidden="true">
+                                                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                  <div class="modal-header">
+                                                                    <h5 class="modal-title" id="uploadLogoModalLabel">Warning</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                      <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                  </div>
+                                                                  <div class="modal-body">
+                                                                    Before continuing, do you want to save your changes?
+                                                                  </div>
+                                                                  <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                                    <button type="button" class="btn btn-primary" id="logoSubmit" data-dismiss="modal">Yes</button>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                              <div class="card-body">
+                                                <table id="logoHierarchy">
+                                                  <tr colspan="3" style="border: 1px solid black;">
+                                                    <td style="border: 1px solid black;">Name</td>
+                                                    <td style="border: 1px solid black;">Visibility</td>
+                                                    <td style="border: 1px solid black;">Delete</td>
+                                                  </tr>
+                                                </table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          
+                                          <!-- Heading two for the lyrics tab in the hierarchy -->
+                                          <div class="card">
+                                            <div class="card-header" id="headingTwo">
+                                              <h5 class="mb-0">
+                                                <button class="btn btn-link btn-sm collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                  Lyrics
+                                                </button>
+                                                <input type="image" src="/EditorMedia/Plus.png" width="20" height="20" data-bs-toggle="modal" data-bs-target="#lyricsModal" id="lyricsPlusButton">
+                                              </h5>
+
+                                              <div class="modal fade" id="lyricsModal" tabindex="-1" aria-labelledby="lyricsModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h5 class="modal-title" id="lyricsModalLabel">Add Properties of Lyrics</h5>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                      </div>
+                                                      
+                                                      <div class="modal-body"> 
+                                                        
+                                                        <!-- Input textfield for the lyrics -->
+                                                          <b>Lyrics:</b><br>
+                                                          <textarea id="lyricsTextArea" name="lyricsTextArea" rows="10" cols="99" placeholder="Enter your lyrics here"  onclick="disableKeyboardListner()" onfocusout="createKeyboardListener()"></textarea>
+                                                          <br><br>
+
+                                                          <b>Font Type: </b><br>
+                                                      
+                                                          <select name="lyricFontType" id="lyricFontType"> 
+                                                            <option value="Arial" style="font-family: 'Arial';">Arial</option>
+                                                            <option value="Cambria" style="font-family: 'Cambria';">Cambria</option>
+                                                            <option value="Courier New" style="font-family: 'Courier New';">Courier New</option>
+                                                            <option value="Cursive" style="font-family: 'Cursive';">Cursive</option>
+                                                            <option value="system-ui" style="font-family: 'system-ui';">Default</option>
+                                                            <option value="Fantasy" style="font-family: 'Fantasy';">Fantasy</option>
+                                                            <option value="Franklin Gothic Medium" style="font-family: 'Franklin Gothic Medium';">Franklin Gothic Medium</option>
+                                                            <option value="Georgia" style="font-family: Georgia">Georgia</option>
+                                                            <option value="Gill Sans" style="font-family: 'Gill Sans'">Gill Sans</option>
+                                                            <option value="Impact" style="font-family: 'Impact';">Impact</option>
+                                                            <option value="Lucida Sans" style="font-family: 'Lucida Sans';">Lucida Sans</option>
+                                                            <option value="Monospace" style="font-family: 'Monospace';">Monospace</option>
+                                                            <option value="Sans-serif" style="font-family: 'Sans-serif';">Sans-serif</option>
+                                                            <option value="Seaweed Script" style="font-family: 'Seaweed Script';">Seaweed Script</option>
+                                                            <option value="Segoe UI" style="font-family: 'Segoe UI';">Segoe UI</option>
+                                                            <option value="Serif" style="font-family: 'Times New Roman';">Seri</option>
+                                                            <option value="Times New Roman" style="font-family: 'Times New Roman';">Times New Roman</option>
+                                                            <option value="Trebuchet MS" style="font-family: 'Trebuchet';">Trebuchet MS</optionc>
+                                                          </select>
+                                                          <br><br>
+
+                                                          <b>Font Size: </b><br>
+                                                          <input type="number" name="lyricFontSize" id="lyricFontSize" value="1" min="1" placeholder="Enter font-size number">
+                                                          <br><br>
+
+                                                          <b>Font Color: </b><br>
+                                                          <input type="color" name="lyricFontColor" id="lyricFontColor">
+                                                          <br><br>
+
+                                                          <b>Background Option: </b><br>
+                                                          <input type="radio" name="lyricBackground" value="Disabled" onchange="lyricSelection();" checked> Disable
+                                                          <input type="radio" name="lyricBackground" value="Enabled" onchange="lyricSelection();"> Enable
+                                                          <br><br>
+
+                                                          <div id="lyricBackgroundOption" style="display:none;">
+                                                            <b>Background Color</b><br>
+                                                            <input type="color" id="lyricbackgroundColor">
+                                                            <br><br>
+                                                          </div>
+                                                          
+                                                          <script>
+                                                            function lyricSelection(){
+                                                              var lyricBackgroundSelection = document.getElementsByName("lyricBackground");
+
+                                                              //User selected the disabled button
+                                                              if(lyricBackgroundSelection[0].checked)
+                                                              {
+                                                                document.getElementById("lyricBackgroundOption").style.setProperty("display", "none");
+                                                              }
+                                                              else //User selected enable
+                                                              {
+                                                                document.getElementById("lyricBackgroundOption").style.setProperty("display", "block");
+                                                              }
+                                                            }
+                                                            
+                                                            function hideLyricsPlusButton(){
+                                                              
+                                                              const lyricsPlusButton = document.getElementById("lyricsPlusButton");
+                                                              
+                                                              lyricsPlusButton.style.setProperty("visibility", "hidden");
+                                                            }
+                                                          </script>
+                                                      </div>
+
+                                                      <div class="modal-footer"> 
+                                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+
+                                                          <button type="button" data-toggle="modal" data-target="#uploadLyricsModal" class="btn btn-primary">
+                                                            Add to screen
+                                                          </button>
+                    
+                                                          <!-- Modal -->
+                                                            <div class="modal fade" id="uploadLyricsModal" tabindex="-1" role="dialog" aria-labelledby="uploadLyricsModalLabel" aria-hidden="true">
+                                                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                  <div class="modal-header">
+                                                                    <h5 class="modal-title" id="uploadLyricsModalLabel">Warning</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                      <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                  </div>
+                                                                  <div class="modal-body">
+                                                                    Before continuing, do you want to save your changes?
+                                                                  </div>
+                                                                  <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                                    <button type="button" class="btn btn-primary" id="lyricSubmit" onclick = "hideLyricsPlusButton()" data-dismiss="modal">Yes</button>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                              <div class="card-body">
+                                                <table id="lyricHierarchy">
+                                                  <tr colspan="3" style="border: 1px solid black;">
+                                                    <td style="border: 1px solid black;">Name</td>
+                                                    <td style="border: 1px solid black;">Visibility</td>
+                                                    <td style="border: 1px solid black;">Delete</td>
+                                                  </tr>
+                                                </table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          
+                                          <!-- Heading three for the design elements tab in the hierarchy -->
+                                          <div class="card">
+                                            <div class="card-header" id="headingThree">
+                                              <h5 class="mb-0">                                              
+                                                <button class="btn btn-link btn-sm collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                  Design Elements
+                                                </button>
+                                                <input type="image" src="/EditorMedia/Plus.png" width="20" height="20" data-bs-toggle="modal" data-bs-target="#exampleModal" id="designElementsPlusButton">
+                                              </h5>
+                                              
+                                              <!-- Design Element Creation pop-up -->
+                                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h5 class="modal-title" id="exampleModalLabel">Design Element Properties</h5>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                      </div>
+                                                      
+                                                      <div class="modal-body"> 
+                                                          <b>Type:</b><br>
+                                                          <select name="shapeType" id="shapeType" onchange="shapeSelection();"> 
+                                                            <option value="Rectangle">Rectangle</option>
+                                                            <option value="Polygon">Polygon</option>
+                                                            <option value="Image">Image</option>
+                                                          </select>
+                                                          <br><br>
+                                                          
+                                                          <b>Name:</b><br>
+                                                          <input type="text" name="shapeName" id="shapeName"  onclick="disableKeyboardListner()" onfocusout="createKeyboardListener()">
+                                                          <br><br>
+
+                                                          <b>Amount:</b><br>
+                                                          <input type="number" name="shapeAmount" id="shapeAmount" min="1" max="8" value="1">
+                                                          <br><br>
+                                                          
+                                                          <div id="PolygonOption" style="display:none;">
+                                                            <b>Number of Sides: </b><br>
+                                                            <input type="number" name="shapeSides" id="shapeSides" min="3" max="99" value="3" required>
+                                                            <br><br>
+                                                          </div>
+
+                                                          <div id="Polygon&CircleOption" style="display:none;">
+                                                            <b>Radius: </b><br>
+                                                            <input type="number" name="shapeRadius" value="1"; id="shapeRadius" max="525" min="1">
+                                                            <br>
+                                                            <input type="range" class="shapeRadiusRange" min="1" max="525" value="1" step="1">
+                                                            <br><br>
+                                                          </div>
+
+                                                          <div id="ImageOption" style="display:none;">
+                                                            <b>Image: </b><br>
+                                                            <input type="file" name="shapeImage" id="shapeImage" accept="image/*">
+                                                            <br><br>
+                                                          </div>
+                                                          
+                                                          <div id="RectangleOption">
+                                                            <b>Width:</b><br>
+                                                              <input type="number" class="shapeWidthNum" name="shapeWidth" id="shapeWidth" min="0" max="1050" value="0" required>
+                                                              <br>
+                                                              <input type="range" class="shapeWidthRange" min="0" max="1050" value="0" step="1">
+                                                            <br><br>
+
+                                                            <b>Height:</b><br>
+                                                              <input type="number" name="shapeHeight" id="shapeHeight"  min="0" max="500" value="0" required>
+                                                              <br>
+                                                              <input type="range" class="shapeHeightRange" min="0" max="500" value="0" step="1">
+                                                            <br><br>
+                                                          </div>
+
+                                                          <script>
+                                                            // for shape width
+                                                            var widthRange = document.querySelector('.shapeWidthRange');
+                                                            var widthNum = document.getElementById('shapeWidth');
+
+                                                            widthRange.addEventListener('input', function (e) {
+                                                              widthNum.value = e.target.value;
+                                                            });
+
+                                                            widthNum.addEventListener('input', function (e) {
+                                                              widthRange.value = e.target.value;
+                                                            });
+
+                                                            //for shape radius
+                                                            var radiusRange = document.querySelector('.shapeRadiusRange');
+                                                            var radiusNum = document.getElementById('shapeRadius');
+
+                                                            radiusRange.addEventListener('input', function (e) {
+                                                              radiusNum.value = e.target.value;
+                                                            });
+
+                                                            radiusNum.addEventListener('input', function (e) {
+                                                              radiusRange.value = e.target.value;
+                                                            });
+
+                                                            // for shape height
+                                                            var heightRange = document.querySelector('.shapeHeightRange');
+                                                            var heightNum = document.getElementById('shapeHeight');
+
+                                                            heightRange.addEventListener('input', function (e) {
+                                                              heightNum.value = e.target.value;
+                                                            });
+
+                                                            heightNum.addEventListener('input', function (e) {
+                                                              heightRange.value = e.target.value;
+                                                            });
+
+                                                            function shapeSelection()
+                                                            {
+                                                              switch(document.getElementById("shapeType").value)
+                                                              {
+                                                                case "Rectangle":
+                                                                  document.getElementById("PolygonOption").style.setProperty("display", "none");
+                                                                  document.getElementById("Polygon&CircleOption").style.setProperty("display", "none");
+                                                                  document.getElementById("RectangleOption").style.setProperty("display", "block");
+                                                                  document.getElementById("ImageOption").style.setProperty("display", "none");
+                                                                  document.getElementById("Fill&BorderOptions").style.setProperty("display", "block");
+                                                                  break;
+
+                                                                case "Polygon":
+                                                                  document.getElementById("PolygonOption").style.setProperty("display", "block");
+                                                                  document.getElementById("Polygon&CircleOption").style.setProperty("display", "block");
+                                                                  document.getElementById("RectangleOption").style.setProperty("display", "none");
+                                                                  document.getElementById("ImageOption").style.setProperty("display", "none");
+                                                                  document.getElementById("Fill&BorderOptions").style.setProperty("display", "block");
+                                                                  break;
+
+                                                                case "Image":
+                                                                  document.getElementById("ImageOption").style.setProperty("display", "block");
+                                                                  document.getElementById("PolygonOption").style.setProperty("display", "none");
+                                                                  document.getElementById("Polygon&CircleOption").style.setProperty("display", "none");
+                                                                  document.getElementById("RectangleOption").style.setProperty("display", "block");
+                                                                  document.getElementById("Fill&BorderOptions").style.setProperty("display", "none");    
+                                                                  break;
+                                                              }
+                                                            }
+                                                          </script>
+                                                          
+                                                          <b>Opacity:</b><br>
+                                                          <div class="block">
+                                                            <input type="range" name="shapeOpacity" id="shapeOpacity" min="0" max="1" value="1" step="0.1" list="markers"> 
+                                                            <label id="shapeOpacityValue"></label> 
+                                                          </div>
+                                                          <br>
+
+                                                          <!-- Used to update the label to reflect what value you are at on the range -->
+                                                          <script>
+                                                            const shapeOpacityOutput = document.getElementById("shapeOpacityValue");
+                                                            const shapeOpacityInput = document.getElementById("shapeOpacity");
+
+                                                            //Have label display the starting value
+                                                            shapeOpacityOutput.innerText = shapeOpacityInput.value;
+
+                                                            // When you move to a diffrent value in the range update the label to current value
+                                                            shapeOpacityInput.addEventListener("input", (event) => {
+                                                              shapeOpacityOutput.innerText = event.target.value;
+                                                            });
+                                                          </script>
+
+                                                          <!-- Used to add tick marks at every o.1 point -->
+                                                          <datalist id="markers">
+                                                            <option value="0"></option>
+                                                            <option value="0.1"></option>
+                                                            <option value="0.2"></option>
+                                                            <option value="0.3"></option>
+                                                            <option value="0.4"></option>
+                                                            <option value="0.5"></option>
+                                                            <option value="0.6"></option>
+                                                            <option value="0.7"></option>
+                                                            <option value="0.8"></option>
+                                                            <option value="0.9"></option>
+                                                            <option value="1"></option>
+                                                          </datalist>
+
+                                                          <div id="Fill&BorderOptions">
+                                                            <b>Fill Color:</b><br>
+                                                            <input type="color" name="shapeFill" id="shapeFill">
+                                                            <br><br>
+
+                                                            <b>Border Color:</b><br>
+                                                            <input type="color" name="shapeStroke" id="shapeStroke">
+                                                            <br><br>
+
+                                                            <b>Border Width:</b><br>
+                                                            <input type="number" name="shapeStrokeWidth" id="shapeStrokeWidth" min="0" max="10" value="0">
+                                                            <br><br>
+                                                          </div>
+
+                                                          <b>Animation:</b><br>
+                                                          <select name="shapeAnimation" id="shapeAnimation"> 
+                                                            <option value="None">None</option>
+                                                            <option value="Clockwise">Clockwise</option>
+                                                            <option value="Counter-Clockwise">Counter-Clockwise</option>
+                                                            <option value="Bouncing">Bouncing</option>
+                                                            <option value="Circular">Circular</option>
+                                                          </select>
+                                                          <br><br>
+                                                          
+                                                          <b>Start Time:</b><br>
+                                                          <input type="text" name="shapeStart-Time" id="shapeStart-Time" placeholder="Enter as 'mm:ss.s' ">
+                                                          <input type="range" id="startTimeSlider" min="0" max="100" step="0.1" value="0">
+                                                          <br><br>
+
+                                                          <b>End Time:</b><br>
+                                                          <input type="text" name="shapeEnd-Time" id="shapeEnd-Time" placeholder="Enter as 'mm:ss.s'">
+                                                          <input type="range" id="endTimeSlider" min="0" max="100" step="0.1" value="0"> 
+                                                          <br><br>                                                                                                                  
+                                                      </div>
+
+                                                      <div class="modal-footer"> 
+                                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                                          <button type="button" data-toggle="modal" data-target="#uploadElementsModal" class="btn btn-primary">
+                                                            Add to screen
+                                                          </button>
+                    
+                                                          <!-- Modal -->
+                                                            <div class="modal fade" id="uploadElementsModal" tabindex="-1" role="dialog" aria-labelledby="uploadElementsModalLabel" aria-hidden="true">
+                                                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                  <div class="modal-header">
+                                                                    <h5 class="modal-title" id="uploadLyricsModalLabel">Warning</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                      <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                  </div>
+                                                                  <div class="modal-body">
+                                                                    Before continuing, do you want to save your changes?
+                                                                  </div>
+                                                                  <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                                    <button type="button" class="btn btn-primary" id="shapeSubmit" data-dismiss="modal">Yes</button>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of the design element po -->
+                                            </div>
+                                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                              <div class="card-body" style="overflow-y: auto; overflow-x: hidden; height: 200px;">
+                                                <!-- to be added -->
+                                                <table id="shapeHierarchy" style="width: 15%; margin: -11px;">
+                                                  <thead>
+                                                    <tr colspan="3" style="border: 1px solid black;">
+                                                      <td style="border: 1px solid black;">Name</td>
+                                                      <td style="border: 1px solid black;">Visibility</td>
+                                                      <td style="border: 1px solid black;">Delete</td>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody id="shapeTableBody">
+
+                                                  </tbody>
+                                                </table>
+
+                                                <!-- Functions to use with buttons in hierarchy table -->
+                                                <script type="module">
+                                                  import {requestSaveBackgroundChanges, requestDeleteBackground, requestShowEditBackgroundSection, requestSaveShapeChanges, showEditShapeSection,requestDeleteShape, requestShapeVisibility, createKeyboardListener, disableKeyboardListner, requestDeleteLyric, modifyLyricSight, toggleLogoVisibility, requestDeleteLogo, requestShowEditLyricSection, requestSaveLyricsChanges, requestShowEditLogoSection, requestSaveLogoChanges, requestDeleteOverlay, requestShowEditOverlaySection, requestSaveOverlayChanges} from "/EditorController.mjs";
+
+                                                  //Functions for keypress
+                                                  window.createKeyboardListener = createKeyboardListener;
+                                                  window.disableKeyboardListner = disableKeyboardListner;
+
+                                                  //Functions for Lyrics
+                                                  window.requestDeleteLyric = requestDeleteLyric;
+                                                  window.modifyLyricSight = modifyLyricSight;
+                                                  window.requestShowEditLyricSection = requestShowEditLyricSection;
+                                                  window.requestSaveLyricsChanges = requestSaveLyricsChanges;
+
+                                                  //Functions for Logo
+                                                  window.toggleLogoVisibility = toggleLogoVisibility;
+                                                  window.requestDeleteLogo = requestDeleteLogo;
+                                                  window.requestShowEditLogoSection = requestShowEditLogoSection;
+                                                  window.requestSaveLogoChanges = requestSaveLogoChanges;
+                                                  
+                                                  //Functions for background
+                                                  window.requestShowEditBackgroundSection = requestShowEditBackgroundSection;
+                                                  window.requestDeleteBackground = requestDeleteBackground;
+                                                  window.requestSaveBackgroundChanges = requestSaveBackgroundChanges;
+
+                                                  //Functions for shapes
+                                                  window.requestDeleteShape = requestDeleteShape;
+                                                  window.requestShapeVisibility = requestShapeVisibility;
+                                                  window.showEditShapeSection = showEditShapeSection;
+                                                  window.requestSaveShapeChanges = requestSaveShapeChanges;
+
+                                                  //Functions for overlay
+                                                  window.requestDeleteOverlay = requestDeleteOverlay;
+                                                  window.requestShowEditOverlaySection = requestShowEditOverlaySection;
+                                                  window.requestSaveOverlayChanges = requestSaveOverlayChanges;
+
+                                                </script>                                            
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <!-- Hedaing five for the overlays tab in the heirarchy -->
+                                          <div class="card">
+                                            <div class="card-header" id="headingFive">
+                                              <h5 class="mb-0">
+                                                <button class="btn btn-link btn-sm collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                  Overlays
+                                                </button>
+                                                <input type="image" src="/EditorMedia/Plus.png" width="20" height="20" data-bs-toggle="modal" data-bs-target="#overlayModal" id="overlayPlusButton">
+                                              </h5>
+                                              <div class="modal fade" id="overlayModal" tabindex="-1" aria-labelledby="overlayModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h5 class="modal-title" id="overlayModalLabel">Add Properties of Overlay</h5>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                      </div>
+                                                      
+                                                      <div class="modal-body"> 
+                                                          <b>Name:</b><br>
+                                                          <input type="text" id="overlayName" name="overlayName">
+                                                          <br><br>
+
+                                                          <b>Overlay Type:</b><br>
+                                                          <select name="overlayOption" id="overlayOption">
+                                                            <option value="overlay1">Squares</option>
+                                                            <option value="overlay2">Snowflakes</option>
+                                                            <option value="overlay3">Bubbles</option>
+                                                            <option value="overlay4">Birds</option> 
+                                                          </select>
+                                                          <br><br>
+
+                                                          <b>Opacity: </b>
+                                                          <div class="block">
+                                                            <input type="range" name="overlayOpacity" id="overlayOpacity" min="0" max="1" value="1" step="0.1" list="markers"> 
+                                                            <label id="overlayOpacityValue"></label> 
+                                                          </div>
+                                                          <br>
+
+                                                          <!-- Used to update the label to reflect what value you are at on the range -->
+                                                          <script>
+                                                            const overlayOpacityOutput = document.getElementById("overlayOpacityValue");
+                                                            const overlayOpacityInput = document.getElementById("overlayOpacity");
+
+                                                            //Have label display the starting value
+                                                            overlayOpacityOutput.innerText = overlayOpacityInput.value;
+
+                                                            // When you move to a diffrent value in the range update the label to current value
+                                                            overlayOpacityInput.addEventListener("input", (event) => {
+                                                              overlayOpacityOutput.innerText = event.target.value;
+                                                            });
+                                                          </script>
+
+                                                          <b>Start Time:</b><br>
+                                                          <input type="text" id="overlayStart" name="overlayStart" placeholder="00:00.0">
+                                                          <input type="range" id="overlayStartTimeSlider" min="0" max="100" step="0.1" value="0">
+                                                          <br><br>
+
+                                                          <b>End Time: </b><br>
+                                                          <input type="text" id="overlayEnd" name="overlayEnd" placeholder="00:00.0">
+                                                          <input type="range" id="overlayEndTimeSlider" min="0" max="100" step="0.1" value="0">
+                                                          <br><br>
+                                                      </div>
+  
+                                                      <div class="modal-footer"> 
+                                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                                          <button type="button" data-toggle="modal" data-target="#uploadOverlayModal" class="btn btn-primary">
+                                                            Add to screen
+                                                          </button>
+                    
+                                                          <!-- Modal -->
+                                                            <div class="modal fade" id="uploadOverlayModal" tabindex="-1" role="dialog" aria-labelledby="uploadOverlayModalLabel" aria-hidden="true">
+                                                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                  <div class="modal-header">
+                                                                    <h5 class="modal-title" id="uploadOverlayModalLabel">Warning</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                      <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                  </div>
+                                                                  <div class="modal-body">
+                                                                    Before continuing, do you want to save your changes?
+                                                                  </div>
+                                                                  <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                                    <button type="button" class="btn btn-primary" id="overlaySubmit" data-dismiss="modal">Yes</button>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                                              <div class="card-body" style="overflow-y: auto; height: 200px;">
+                                                <table id="overlayHierarchy" style="width: 30%;">
+                                                  <tr colspan="3" style="border: 1px solid black;">
+                                                    <td style="border: 1px solid black;">Name</td>
+                                                    <td style="border: 1px solid black;">Visibility</td>
+                                                    <td style="border: 1px solid black;">Delete</td>
+                                                  </tr>
+                                                </table>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <!-- Heading four for the background tab in the hierarchy -->
+                                          <div class="card">
+                                              <div class="card-header" id="headingFour">
+                                                <h5 class="mb-0">
+                                                  <button class="btn btn-link btn-sm collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                    Backgrounds 
+                                                  </button>
+                                                  <input type="image" src="/EditorMedia/Plus.png" width="20" height="20" data-bs-toggle="modal" data-bs-target="#backModal" id="backgroundPlusButton">
+                                                </h5>
+                                                <div class="modal fade" id="backModal" tabindex="-1" aria-labelledby="backModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="backModalLabel">Add Properties of Background</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        
+                                                        <div class="modal-body"> 
+                                                            <b>Image/Video Upload: </b><br>
+                                                            <input type="file" id="imgInput"  accept="image/*, video/*">
+                                                            <br><br>
+                                                            
+                                                            <b>Start Time:</b><br>
+                                                            <input type="text" id="backgroundStart" name="backgroundStart" placeholder="00:00.0">
+                                                            <input type="range" id="startBackgroundTimeSlider" min="0" max="100" step="0.1" value="0">
+                                                            <br><br>
+                                                        </div>
+    
+                                                        <div class="modal-footer"> 
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                                            <button type="button" data-toggle="modal" data-target="#uploadFilesModal" class="btn btn-primary">
+                                                              Add to screen
+                                                            </button>
+                      
+                                                            <!-- Modal -->
+                                                              <div class="modal fade" id="uploadFilesModal" tabindex="-1" role="dialog" aria-labelledby="uploadFilesModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                  <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                      <h5 class="modal-title" id="uploadFilesModalLabel">Warning</h5>
+                                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                      </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                      Before continuing, do you want to save your changes?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                                      <button type="button" class="btn btn-primary" id="fileSubmit" data-dismiss="modal">Yes</button>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                              </div>
+                                              </div>
+                                              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                                <div class="card-body" style="overflow-y: auto; height: 200px;">
+                                                  <table id="backgroundHierarchy" style="width: 30%;">
+                                                    <tr colspan="3" style="border: 1px solid black;">
+                                                      <td style="border: 1px solid black;">Name</td>
+                                                      <td style="border: 1px solid black;">Visibility</td>
+                                                      <td style="border: 1px solid black;">Delete</td>
+                                                    </tr>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                  </td>
+                                
+                                  <!-- Canvas Column -->
+                                  <td id="CanvasColumn" style="width: 70%; background-color: lightslategray; border: rgb(83, 82, 82); border-style: solid; border-width: 2px;">
+                                      <div id="CanvasWindow">
+                                        <div id="BackgroundLayer">
+                                          <img id="imageContent" onload="this.style.display='block'" onerror="this.style.display='none'">
+                                          <video id="videoContent"></video>
+                                        </div>
+
+                                        <div id="animatedBackdrop" style="opacity: 1; visibility: hidden;">
+                                          <ul class="circles">
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                          </ul>
+                                        </div>
+
+                                        <div id="KonvaCanvas" style="width: 100%; height: 100%;">
+                                        </div>
+
+                                        <!-- Audio Element to play  -->
+                                        <audio id="musicPlayer" preload="metadata">
+                                          <source id="musicSrc" type="audio/mpeg">
+                                        </audio>
+                                      </div>
+                                  </td>
+                                  
+                                  
+                                  <!-- Properties Column -->
+                                  <td class="propertiesPage" style="background-color: lightslategray; width: 15%; overflow-y: scroll; max-height: 500px;">
+                                    <div id="editShapePopUp" style="display:none; max-height: 495px; width: 100%;"> 
+                                      
+                                      <h2 id="editHeader"></h2>
+
+                                      <!-- Might not make name editable unless we can modify the name of the shape in the heirarchy -->
+                                      <label><b>Name:</b></label>
+                                      <input type="text" id="editShapeName" placeholder="Enter Shape Name" onclick="disableKeyboardListner()" onfocusout="createKeyboardListener()"> 
+
+                                      <!-- Might not use shape type -->
+
+                                      <!--------------------- Edit Options for rectangle ---------------------->
+                                      <!-- Shape Width -->
+                                      <div id="editRectangleValues">
+                                        <br><label for="editShapeWidth"><b>Width:</b></label><br>
+                                          <input type="number" id="editShapeWidth" min="0" max="1050" value="0" placeholder="Enter Width">
+                                          <input type="range" class="editShapeWidthRange" min="0" max="1050" value="0" step="1">
+
+                                        <!-- Shape Height -->
+                                        <br><br>
+                                        <label for="editShapeHeight"><b>Height:</b></label>
+                                          <br><input type="number" id="editShapeHeight" min="0" max="500" value="0" placeholder="Enter Height">
+                                          <input type="range" class="editShapeHeightRange" min="0" max="500" value="0" step="1">
+                                      </div>
+
+                                      <script>
+                                        // edit properties for width
+                                        var editWidthRange = document.querySelector('.editShapeWidthRange');
+                                        var editWidthNum = document.getElementById('editShapeWidth');
+
+                                        editWidthRange.addEventListener('input', function (e) {
+                                          editWidthNum.value = e.target.value;
+                                        });
+
+                                        editWidthNum.addEventListener('input', function (e){
+                                          editWidthRange.value = e.target.value;
+                                        });
+
+                                        // edit properties for height
+                                        var editHeightRange = document.querySelector('.editShapeHeightRange');
+                                        var editHeightNum = document.getElementById('editShapeHeight');
+
+                                        editHeightRange.addEventListener('input', function(e) {
+                                          editHeightNum.value = e.target.value;
+                                        });
+                                        
+                                        editHeightNum.addEventListener('input', function (e) {
+                                          editHeightRange.value = e.target.value;
+                                        });
+
+                                      </script>
+                                      <!-- ----------------------------------------------------------------- -->
+
+                                      <!---------------------- Edit Options for Polygon------------------------->
+                                      <div id="editPolygonValues">
+                                        <br><label for="editShapeSides"><b>Number of Sides:</b></label><br>
+                                        <input type="number" id="editShapeSides" value="3" max="99" min="3" placeholder="Enter number of sides">
+                                        <br>                  
+                                        <br><label for="editShapeRadius"><b>Radius:</b></label><br>
+                                        <input type="number" id="editShapeRadius" max="525" min="1" placeholder="Enter the radius">
+                                        <input type="range" class="editShapeRadiusRange" min="1" max="525" value="1" step="1">
+
+                                        <script>
+                                          // edit properties for radius
+                                          var editShapeRadiusRange = document.querySelector(".editShapeRadiusRange");
+                                          var editShapeRadiusNum = document.getElementById('editShapeRadius');
+
+                                          editShapeRadiusRange.addEventListener('input', function (e) {
+                                            editShapeRadiusNum.value = e.target.value;
+                                          });
+
+                                          editShapeRadiusNum.addEventListener('input', function (e){
+                                            editShapeRadiusRange.value = e.target.value;
+                                          });
+                                        </script>
+                                      </div>
+                                      <!-- ------------------------------------------------------------------ -->
+
+                                      <!----------------------- Edit Options for Image ------------------------->
+                                      <div id="imageValues">
+                                        <br><label for="editShapeFile"><b>Image Upload: </b></label>
+                                        <input type="file" id="editShapeFile" style="width: 80%;" accept="image/*">
+                                      </div>
+                                      <!------------------------------------------------------------------------>
+
+                                      <!-- Shape Color -->
+                                      <div id="editBorder&FillColors">
+                                        <br><label for="editShapeFill"><b>Fill Color:</b></label><br>
+                                        <input type="color" id="editShapeFill">
+                                        
+                                        <!-- Border Color-->
+                                        <br><br><label for="editShapeStroke"><b>Stroke Color:</b></label><br>
+                                        <input type="color" id="editShapeStroke" placeholder="Enter a border color">
+                                        
+                                        <!-- Border Width -->
+                                        <br><br><label for="editShapeStrokeWidth"><b>Stroke Width:</b></label><br>
+                                        <input type="number" id="editShapeStrokeWidth" max="10" min="0"  value="0">
+                                      </div>
+                                      
+
+                                      <!-- Shape X location -->
+                                      <br><label for="editShapeX"><b>X-Location:</b></label><br>
+                                      
+                                      <input type="number" id="editShapeX" value="0" min="0" max="1050" placeholder="Enter the X location">
+
+                                      <!-- Shape Y location -->
+                                      <br><br><label for="editShapeY"><b>Y-Location:</b></label>
+                                      <br>
+                                      <input type="number" id="editShapeY" value="0" min="0" max="500"  placeholder="Enter the Y location">
+
+                                      <!-- Shape Opacity -->
+                                      <br><br><label for="editShapeOpacity"><b>Opacity:</b></label>
+                                      <br><div class="block">
+                                        <input type="range" id="editShapeOpacity" min="0" max="1" step="0.1">
+                                        <label id="editShapeOpacityValue"></label><br><br>
+                                      </div>
+
+                                      <label for="editAnimationType"><b>Animation Type:</b> </label>
+                                      <br><select name="editShapeAnimation" id="editShapeAnimation">
+                                        <option value="None">None</option>
+                                        <option value="Clockwise">Clockwise</option>
+                                        <option value="Counter-Clockwise">Counter-Clockwise</option>
+                                        <option value="Bouncing">Bouncing</option>
+                                        <option value="Circular">Circular</option>
+                                      </select>
+
+                                      <!-- Start Time -->
+                                      <br><br><label><b>Start Time:</b></label>
+                                        <input type="text" id="editShapeStartTime" placeholder="Enter start time (00:00.0)"><br>
+                                        <input type="range" id="editShapeStartTimeSlider" min="0" max="100" step="0.1">
+
+                                      <!-- End time -->
+                                      <br><br><label><b>End Time:</b></label>
+                                        <input type="text" id="editShapeEndTime" placeholder="Enter end time (00:00.0)"><br>
+                                        <input type="range" id="editShapeEndTimeSlider" min="0" max="100" step="0.1">
+                                      
+                                      <!-- Save Changes -->
+                                      <br><br><button type="button" data-toggle="modal" data-target="#saveShapesModal">
+                                        Save Changes
+                                      </button>
+                                      <br><br>
+
+                                      <!-- Modal -->
+                                        <div class="modal fade" id="saveShapesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                          <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Warning</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                Before continuing, do you want to save your changes?
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" id="saveChangeButton" data-dismiss="modal">Save changes</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      
+                                    </div>
+
+                                    <div id="overlayPopUp" style="display: none; max-height: 500px; width: 100%;">
+                                      <label><b>Name: </b></label><br>
+                                      <input type="text" id="editOverlayName" placeholder="Enter Overlay Name" onclick="disableKeyboardListner()" onfocusout="createKeyboardListener()"> 
+                                      <br><br>
+
+                                      <b>Overlay Type:</b><br>
+                                      <select name="editOverlayOption" id="editOverlayOption">
+                                        <option value="overlay1">Squares</option>
+                                        <option value="overlay2">Snowflakes</option>
+                                        <option value="overlay3">Bubbles</option>
+                                        <option value="overlay4">Birds</option> 
+                                      </select>
+                                      <br><br>
+
+                                      <b>Opacity: </b>
+                                      <div class="block">
+                                        <input type="range" name="editOverlayOpacity" id="editOverlayOpacity" min="0" max="1" value="1" step="0.1" list="markers"> 
+                                        <label id="editOverlayOpacityValue"></label> 
+                                      </div>
+                                      <br>
+
+                                       <!-- Used to update the label to reflect what value you are at on the range -->
+                                       <script>
+                                        const editOverlayOpacityOutput = document.getElementById("editOverlayOpacityValue");
+                                        const editOverlayOpacityInput = document.getElementById("editOverlayOpacity");
+
+                                        //Have label display the starting value
+                                        editOverlayOpacityOutput.innerText = editOverlayOpacityInput.value;
+
+                                        // When you move to a diffrent value in the range update the label to current value
+                                        editOverlayOpacityInput.addEventListener("input", (event) => {
+                                          editOverlayOpacityOutput.innerText = event.target.value;
+                                        });
+                                      </script>
+
+                                      <b>Start Time:</b><br>
+                                      <input type="text" id="editOverlayStart" name="editOverlayStart" placeholder="00:00.0">
+                                      <input type="range" id="editOverlayStartTimeSlider" min="0" max="100" step="0.1" value="0">
+                                      <br><br>
+
+                                      <b>End Time: </b><br>
+                                      <input type="text" id="editOverlayEnd" name="editOverlayEnd" placeholder="00:00.0">
+                                      <input type="range" id="editOverlayEndTimeSlider" min="0" max="100" step="0.1" value="0">
+                                      <br><br>
+
+                                      <!-- Save Changes -->
+                                      <br><br><button type="button" data-toggle="modal" data-target="#saveOverlayModal">
+                                        Save Changes
+                                      </button>
+                                      <br><br>
+
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="saveOverlayModal" tabindex="-1" role="dialog" aria-labelledby="saveFileModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="saveFileModalLabel">Warning</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              Before continuing, do you want to save your changes?
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                              <button type="button" class="btn btn-primary" id="saveOverlayButton" data-dismiss="modal">Yes</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      
+                                    </div>
+
+                                    <div id="lyricEditPopUp" style="display: none; max-height: 500px; width: 100%;">
+                                      <label><b>Lyrics: </b></label><br>
+                                      <textarea id="editLyricsTextArea" name="editLyricsTextArea" rows="10" cols="99" placeholder="Enter your lyrics here"  onclick="disableKeyboardListner()" onfocusout="createKeyboardListener()" style="width: 100%; resize: none;"></textarea>
+                                      <br><br>
+
+                                      <b>Font Type: </b><br>
+                                      <select name="editlyricFontType" id="editlyricFontType">
+                                        <option value="Arial" style="font-family: 'Arial';">Arial</option>
+                                        <option value="Cambria" style="font-family: 'Cambria';">Cambria</option>
+                                        <option value="Courier New" style="font-family: 'Courier New';">Courier New</option>
+                                        <option value="Cursive" style="font-family: 'Cursive';">Cursive</option>
+                                        <option value="system-ui" style="font-family: 'system-ui';">Default</option>
+                                        <option value="Fantasy" style="font-family: 'Fantasy';">Fantasy</option>
+                                        <option value="Franklin Gothic Medium" style="font-family: 'Franklin Gothic Medium';">Franklin Gothic Medium</option>
+                                        <option value="Georgia" style="font-family: Georgia">Georgia</option>
+                                        <option value="Gill Sans" style="font-family: 'Gill Sans'">Gill Sans</option>
+                                        <option value="Impact" style="font-family: 'Impact';">Impact</option>
+                                        <option value="Lucida Sans" style="font-family: 'Lucida Sans';">Lucida Sans</option>
+                                        <option value="Monospace" style="font-family: 'Monospace';">Monospace</option>
+                                        <option value="Sans-serif" style="font-family: 'Sans-serif';">Sans-serif</option>
+                                        <option value="Seaweed Script" style="font-family: 'Seaweed Script';">Seaweed Script</option>
+                                        <option value="Segoe UI" style="font-family: 'Segoe UI';">Segoe UI</option>
+                                        <option value="Serif" style="font-family: 'Times New Roman';">Seri</option>
+                                        <option value="Times New Roman" style="font-family: 'Times New Roman';">Times New Roman</option>
+                                        <option value="Trebuchet MS" style="font-family: 'Trebuchet';">Trebuchet MS</optionc>
+                                      </select>
+                                      <br><br>
+
+                                      <b>Font Size: </b><br>
+                                      <input type="number" name="editlyricFontSize" id="editlyricFontSize" value="1" min="1" placeholder="Enter font-size number">
+                                      <br><br>
+
+                                      <b>Font Color: </b><br>
+                                      <input type="color" name="editlyricFontColor" id="editlyricFontColor">
+                                      <br><br>
+
+                                      <b>Background Option: </b><br>
+                                      <input type="radio" id="disableEditLyricButton" name="lyricEditBackground" value="Disabled" onchange="lyricEditSelection();" checked> Disable
+                                      <input type="radio" id="enableEditLyricButton" name="lyricEditBackground" value="Enabled" onchange="lyricEditSelection();"> Enable
+                                      <br><br>
+
+                                      <div id="lyricEditBackgroundOption" style="display:none;">
+                                        <b>Background Color</b><br>
+                                        <input type="color" id="lyricEditBackgroundColor">
+                                        <br><br>
+                                      </div>
+
+                                      <button type="button" data-toggle="modal" data-target="#saveLyricsModal" >
+                                        Save Changes
+                                      </button>
+                                      <br><br>
+                                    
+
+                                      <!-- Modal -->
+                                        <div class="modal fade" id="saveLyricsModal" tabindex="-1" role="dialog" aria-labelledby="saveFileModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="saveFileModalLabel">Warning</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                Before continuing, do you want to save your changes?
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                <button type="button" class="btn btn-primary" id="saveLyricsButton" data-dismiss="modal">Yes</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      <script>
+                                        function lyricEditSelection()
+                                        {
+                                          var lyricBackgroundSelection = document.getElementsByName("lyricEditBackground");
+
+                                          //User selected the disabled button
+                                          if(lyricBackgroundSelection[0].checked)
+                                          {
+                                            document.getElementById("lyricEditBackgroundOption").style.setProperty("display", "none");
+                                          }
+                                          else //User selected enable
+                                          {
+                                            document.getElementById("lyricEditBackgroundOption").style.setProperty("display", "block");
+                                          }
+                                        }
+                                      </script>
+                                    </div>
+
+                                    <div id="editLogoPopUp" style="display: none;">
+                                      <b>Name:</b><br>
+                                      <input type="text" name="editLogoName" id="editLogoName"  onclick="disableKeyboardListner()" onfocusout="createKeyboardListener()">
+                                      <br><br>
+
+                                      <b>Image Upload: </b><br>
+                                      <input type="file" id="EditLogoInput" style="width: 80%;" accept="image/*">
+                                      <br><br>
+
+                                      <b>Width:</b><br> 
+                                      <input type="number" name="EditLogoWidth" id="EditLogoWidth" min="1" max="1050" value="1" required>
+                                      <input type="range" class="editLogoWidthRange" min="1" max="1050" value="1" step="1">
+                                      <br><br>
+                                      
+                                      <b>Height:</b><br> 
+                                      <input type="number" name="EditLogoHeight" id="EditLogoHeight" min="1" max="500" value="1" required>
+                                      <input type="range" class="editLogoHeightRange" min="1" max="500" value="1" step="1">
+                                      <br><br>
+
+                                      <b>Opacity:</b><br>
+                                      <div class="block">
+                                        <input type="range" name="EditLogoOpacity" id="EditLogoOpacity" min="0" max="1" value="1" step="0.1" list="logoMarkers"> 
+                                        <label id="EditLogoOpacityValue"></label> 
+                                      </div>
+                                      <br>
+
+                                      <button type="button" data-toggle="modal" data-target="#saveLogoModal">
+                                        Save Changes
+                                      </button>
+
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="saveLogoModal" tabindex="-1" role="dialog" aria-labelledby="saveFileModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="saveFileModalLabel">Warning</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              Before continuing, do you want to save your changes?
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                              <button type="button" class="btn btn-primary" id="saveBackgroundButton" onclick="requestSaveLogoChanges()" data-dismiss="modal">Yes</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <script>
+                                        // ********Logo Width & Height ********
+                                        var editLogoWidthRange = document.querySelector('.editLogoWidthRange');
+                                        var EditLogoWidthNum = document.getElementById("EditLogoWidth");
+
+                                        editLogoWidthRange.addEventListener('input', function(e){
+                                          EditLogoWidthNum.value = e.target.value;
+                                        });
+
+                                        EditLogoWidthNum.addEventListener('input', function(e){
+                                          editLogoWidthRange.value = e.target.value;
+                                        });
+
+                                        var editLogoHeightRange = document.querySelector('.editLogoHeightRange');
+                                        var EditLogoHeightNum = document.getElementById("EditLogoHeight");
+
+                                        editLogoHeightRange.addEventListener('input', function(e){
+                                          EditLogoHeightNum.value = e.target.value;
+                                        });
+
+                                        EditLogoHeightNum.addEventListener('input', function(e){
+                                          editLogoHeightRange.value = e.target.value;
+                                        });
+
+                                        //********Logo Opacity******* 
+                                        const editLogoOpacityOutput = document.getElementById("EditLogoOpacityValue");
+                                        const editLogoOpacityInput = document.getElementById("EditLogoOpacity");
+
+                                        //Have label display the starting value
+                                        editLogoOpacityOutput.innerText = editLogoOpacityInput.value;
+
+                                        // When you move to a diffrent value in the range update the label to current value
+                                        editLogoOpacityInput.addEventListener("input", (event) => {
+                                          editLogoOpacityOutput.innerText = event.target.value;
+                                        });
+                                      </script>
+                                    </div>
+
+                                    <div id ="editBackgroundPopUp" style="display: none;">
+                                      <!-- File Input -->
+                                      <label><b>Image/Video Upload: </b></label><br>
+                                      <input type="file" style="width: 80%;" id="editFileInput" accept="image/*, video/*"><br><br>
+                                      <!-- Start Time -->
+                                      <label><b>Start Time:</b></label><br>
+                                      <input type="text" id="editStartTime"><br>
+                                      <input type="range" id="editBGTimeSlider" min="0" max="100" step="0.1" value="0">
+                                      <!-- Save background changes -->
+                                      <br><br>
+                                      <button type="button" id="saveEditBackgroundButton" data-toggle="modal" data-target="#saveFileModal" >
+                                        Save Changes
+                                      </button>
+
+                                      <!-- Modal -->
+                                        <div class="modal fade" id="saveFileModal" tabindex="-1" role="dialog" aria-labelledby="saveFileModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="saveFileModalLabel">Warning</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                Before continuing, do you want to save your changes?
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                <button type="button" class="btn btn-primary" id="saveBackgroundButton" data-dismiss="modal">Yes</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                    </div>
+                                  </td>
+                          </tr>
+                          <tr colspan="3" style="border-color: #ecb5a2; border-width: 2px;">
+                              <td style="width: 15%; background-color: #ecb5a2;">
+                                <span id="audioTimestamp" style="float: right;">00:00.0</span>
+                              </td>
+                              <td  style="text-align: center; background-color: #ecb5a2; width: 70%;">
+                                <input class="slider" type="range" id="timeSlider" min="0" max="100" step="0.1" value="0" disabled />
+                              </td>
+
+                              <td style="width: 15%; background-color: #ecb5a2;">
+                                <span id="audioDuration" style="justify-content: left;"></span>
+                              </td>
+
+                              <!-- Calcuate the duration of the audio file -->
+                              <script>
+                                //Get the duartion of the audio
+                                const audio = document.getElementById('musicPlayer');
+                                  
+                                //Calcuate duartion when metaData is ready
+                                audio.onloadedmetadata = function() {
+                                  console.log(audio.duration)
+                                  
+                              
+                                //Calculate Mins
+                                const min = Math.floor(audio.duration / 60);
+                                
+                                //Calculate Secs
+                                const seconds = Math.floor(audio.duration % 60);
+
+                                //Calcuate DeciSecs
+                                const deciseconds = Math.floor((audio.duration * 10)) % 10;
+
+                                //Display the clauclted timestamp to audioDuration
+                                const maxTime = `${min.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${deciseconds.toString().padStart(1, '0')}`;
+                                document.getElementById("audioDuration").innerText = maxTime;
+                                }; 
+                              </script>
+                          </tr>
+                          <tr id="controlsRow" style="border-color: #ecb5a2; border-width: 2px;">
+                            <td colspan="3" style="padding: 0%;">
+                              <div style="display: flex; justify-content: center;">
+                                <button id="Play&PauseButton" style="background-color: transparent; border: none;">
+                                  <img id="Play&PauseIcon" src="/EditorMedia/play-icon.png" alt="Submit" style="width: 35px; height: 35px;">
+                                </button>
+                                <button id="RestartButton" style="background-color: transparent; border: none; ">
+                                  <img src="/EditorMedia/restart.png" alt="Submit" style="width: 35px; height: 35px;">
+                                </button>
+                                <button id="leftArrowButton" style="background-color: transparent; border: none;">
+                                  <img src="/EditorMedia/left-Arrow.png" alt="Submit" style="width: 35px; height: 35px;">
+                                </button>
+                                <button id="rightArrowButton" style="background-color: transparent; border: none;">
+                                  <img src="/EditorMedia/Right Arrow.png" alt="Submit" style="width: 35px; height: 35px;">
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+            
+        </div>
+  
+        <div class="overlap-2">
+            <!-- bootstrap Navigation bar -->
+            <nav class="navbar top-bar">
+                <div class="container-fluid">
+                    <div class="songcanvas-logo">
+                        <div class="overlap-3">
+<!-- Path to file-->                                
+                            <img class="polygon" src="/mic_body.png" />
+<!-- Path to file-->                                
+                            <img class="img" src="/mic_head.png" />
+                            <div class="rectangle-3"></div>
+                            <div class="s-ngcanvas">S&nbsp;&nbsp;ngCanvas</div>
+                        </div>
+                    </div>
+            </nav>    
+            <nav class="navbar navbar-expand-xxxl"> 
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" style="background-color: #ecb5a2;" id="navbarNavAltMarkup">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+<!-- Path to file-->                                
+                            <a class="nav-link" href="#">&emsp;<img src="/navbar/question.png" class="mini-pic">&ensp;Q&A</a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a class="nav-link" href="/DashboardViews/dashboard.html">&emsp;<img src="/navbar/home.png" class="mini-pic">&ensp;Return to Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+<!-- Path to file-->                                
+                            <a class="nav-link" href="#">&emsp;<img src="/navbar/settings.png" class="mini-pic">&ensp;Settings</a>
+                        </li>
+                        <li class="nav-item">
+<!-- Path to file-->                                
+                            <a class="nav-link" href="/LoginViews/login.html">
+                                &emsp;Log Out
+                                <div class="hover-gif">
+<!-- Path to file-->                                        
+                                    <img src="/navbar/shrug-carrie-underwood.gif" class="hover-gif-img">
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+<!-- Path to file-->                                    
+                                &emsp;<button type="button" class="btn-close" aria-label="Close"></button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+</body>
+</html>

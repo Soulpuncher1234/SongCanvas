@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Define the animatedBackdrop div */
+#animatedBackdrop{
+    overflow: hidden;
+}
+
+/* Style the unordered list  */
+.circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Handle all the li elements in the unordered list */
+.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 110px;
+    height: 110px;
+
+    background: url("/PlayerViews/avecita.gif");
+    background-size: cover;
+
+    animation: animate 25s linear infinite;
+    left: -150px;
+
+}
+
+.circles li:nth-child(1) {
+    animation-delay: 0s;
+    top: 0%;
+}
+
+.circles li:nth-child(2) {
+    animation-delay: 2s;
+    animation-duration: 12s;
+    top: 12%;
+}
+
+.circles li:nth-child(3) {
+    animation-delay: 4s;
+    top: 25%;
+}
+
+.circles li:nth-child(4) {
+    animation-delay: 0s;
+    animation-duration: 18s;
+    top: 32%;
+}
+
+.circles li:nth-child(5) {
+    animation-delay: 0s;
+    top: 17%;
+}
+
+.circles li:nth-child(6) {
+    animation-delay: 3s;
+    top: 5%;
+}
+
+.circles li:nth-child(7) {
+    animation-delay: 7s;
+    top: 17%;
+    visibility: hidden;
+}
+
+.circles li:nth-child(8) {
+    animation-delay: 15s;
+    animation-duration: 45s;
+    top: 0%;
+    visibility: hidden;
+}
+
+.circles li:nth-child(9) {
+    animation-delay: 2s;
+    animation-duration: 35s;
+    top: 14%;
+}
+
+.circles li:nth-child(10) {
+    animation-delay: 0s;
+    animation-duration: 11s;
+    top: 22%;
+    visibility: hidden;
+}
+
+/* Create Underwater animation */
+@keyframes animate {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(1250px);
+    }
+}

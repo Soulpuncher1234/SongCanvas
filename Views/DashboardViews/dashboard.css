@@ -1,0 +1,223 @@
+.dashboard {
+    position: relative;
+    width: 100%;
+    /* height: 100%; */
+    background-color: #ffffff;
+  }
+  
+  .dashboard .overlap {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    /* top: 66px; */
+    left: 0;
+    background-image: url(/DashboardMedia/Dashboard.jpg);
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+  
+  .dashboard .player-view {
+    position: absolute;
+    width: 40%;
+    height: 825px;
+    top: 3%;
+    left: 55%;
+    transition: transform 0.3s;
+  }
+  
+  .dashboard .player-view:hover{
+    transform: scale(1.05);
+  }
+  
+  .dashboard .rectangle {
+    position: absolute;
+    width: 100%;
+    height: 75%;
+    top: 8%;
+    background-color: #ffffffd9;
+    border-radius: 50px;
+    border: 10px solid;
+    border-color: #000000;
+    opacity: 0.75;
+  }
+  
+  .dashboard .playpage {
+    position: absolute;
+    width: 80%;
+    height: 53%;
+    top: 25%;
+    left: 10%;
+    object-fit: cover;
+  }
+  
+  .dashboard .text-wrapper {
+    position: absolute;
+    top: 80px;
+    left: 15%;
+    font-family: 'Hubballi', sans-serif;
+    font-weight: 400;
+    color: #000000;
+    width: 100%;
+    font-size: 84px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .dashboard .editor-view {
+    position: absolute;
+    width: 40%;
+    height: 825px;
+    top: 3%;
+    left: 5%;
+    transition: transform 0.3s;
+  }
+  
+  .dashboard .editor-view:hover{
+    transform: scale(1.05);
+  }
+  
+  .dashboard .rectangle-2 {
+    position: absolute;
+    width: 100%;
+    height: 75%;
+    top: 8%;
+    background-color: #ffffffd9;
+    border-radius: 50px;
+    border: 10px solid;
+    border-color: #000000;
+    opacity: 0.75;
+  }
+  
+  .dashboard .badasseditpage {
+    position: absolute;
+    width: 80%;
+    height: 53%;
+    top: 25%;
+    left: 10%;
+    object-fit: cover;
+  }
+  
+  .dashboard .text-wrapper-2 {
+    position: absolute;
+    top: 80px;
+    left: 15%;
+    width: 100%;
+    font-family: 'Hubballi', sans-serif;
+    font-weight: 400;
+    color: #000000;
+    font-size: 84px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .dashboard .overlap-2 {
+    position: absolute;
+    width: 100%;
+    height: 66px;
+    top: 0;
+    left: 0;
+  }
+  
+  .dashboard .top-bar {
+    position: absolute;
+    width: 100%;
+    height: 65px;
+    top: 0;
+    left: 0;
+    background-color: #ecb5a2;
+  }
+  
+  .dashboard .songcanvas-logo {
+    position: absolute;
+    width: 239px;
+    height: 66px;
+    top: 0;
+    left: 17px;
+  }
+  
+  .dashboard .overlap-3 {
+    position: relative;
+    width: 237px;
+    height: 59px;
+    top: 7px;
+  }
+  
+  .dashboard .polygon {
+    position: absolute;
+    width: 20px;
+    height: 26px;
+    top: 23px;
+    left: 28px;
+  }
+  
+  .dashboard .img {
+    position: absolute;
+    width: 19px;
+    height: 20px;
+    top: 13px;
+    left: 23px;
+  }
+  
+  .dashboard .rectangle-3 {
+    position: absolute;
+    width: 19px;
+    height: 4px;
+    top: 21px;
+    left: 23px;
+    background-color: #d9d9d9;
+    border-radius: 2px;
+    transform: rotate(-33.91deg);
+  }
+  
+  .dashboard .s-ngcanvas {
+    position: absolute;
+    width: 237px;
+    top: 0;
+    left: 0;
+    font-family: 'Concert One', sans-serif;
+    font-weight: 700;
+    color: #000000;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .navbar-toggler{
+    margin-left: 90%;
+    margin-top: 0.5%;
+  }
+
+  .card-link{
+    text-decoration: none;
+  }
+
+  .nav-item:hover {
+    background-color: #ffffff;
+  }
+
+  .hover-gif {
+    position: absolute;
+    display: inline-block;
+    margin-top: -10%;
+    margin-left: 62%;
+}
+
+.hover-gif-img {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.2s; /* You can adjust the transition duration */
+}
+
+.hover-gif:hover .hover-gif-img {
+    opacity: 1;
+}
+
+.mini-pic{
+  height: 15px;
+  width: 15px;
+  margin-bottom: 2px;
+
+}

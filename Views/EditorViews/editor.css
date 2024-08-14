@@ -1,0 +1,182 @@
+.editor .overlap-2 {
+    position: absolute;
+    width: 100%;
+    height: 66px;
+    top: 0;
+    left: 0;
+  }
+  
+  .editor .top-bar {
+    position: absolute;
+    width: 100%;
+    height: 65px;
+    top: 0;
+    left: 0;
+    background-color: #ecb5a2;
+  }
+  
+  .editor .songcanvas-logo {
+    position: absolute;
+    width: 239px;
+    height: 66px;
+    top: 0;
+    left: 17px;
+  }
+  
+  .editor .overlap-3 {
+    position: relative;
+    width: 237px;
+    height: 59px;
+    top: 7px;
+  }
+  
+  .editor .polygon {
+    position: absolute;
+    width: 20px;
+    height: 26px;
+    top: 23px;
+    left: 28px;
+  }
+  
+  .editor .img {
+    position: absolute;
+    width: 19px;
+    height: 20px;
+    top: 13px;
+    left: 23px;
+  }
+  
+  .editor .rectangle-3 {
+    position: absolute;
+    width: 19px;
+    height: 4px;
+    top: 21px;
+    left: 23px;
+    background-color: #d9d9d9;
+    border-radius: 2px;
+    transform: rotate(-33.91deg);
+  }
+  
+  .editor .s-ngcanvas {
+    position: absolute;
+    width: 237px;
+    top: 0;
+    left: 0;
+    font-family: 'Concert One', sans-serif;
+    font-weight: 700;
+    color: #000000;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+.navbar-toggler{
+    margin-left: 90%;
+    margin-top: 0.5%;
+}
+
+.hover-gif {
+  position: absolute;
+  display: inline-block;
+  margin-top: -10%;
+  margin-left: 62%;
+}
+
+.hover-gif-img {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.2s; /* You can adjust the transition duration */
+}
+
+.hover-gif:hover .hover-gif-img {
+  opacity: 1;
+}
+
+.bootstrap-table{
+    margin-top: 65px;
+    width: 100%;
+    height: 100%;
+}
+
+.headers-tab{
+    margin-bottom: -16px;
+    background-color: #ecb5a2;
+}
+
+.mini-pic{
+  height: 15px;
+  width: 15px;
+  margin-bottom: 2px;
+
+}
+
+/******************
+Style the canvas column
+*******************/
+#CanvasWindow{
+  position: relative;
+  background-color: black;
+  width: auto;
+  height: 500px;
+}
+
+#animatedBackdrop{
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+}
+
+#BackgroundLayer, #KonvaCanvas{
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+}
+
+#BackgroundLayer video,
+#BackgroundLayer img{
+  position: absolute;
+}
+
+#videoContent{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#imageContent{
+  width: 100%;
+  height: 100%;
+
+  /* Not sure if we need to add object-fit here or not */
+}
+
+/* styling for Animated Backdrop */
+
+
+/* Styling for the plus buttons */
+#plusButton{
+  float: right;
+}
+
+.slider {
+  width: 100%;
+}
+
+/* added */
+.propertiesPage::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+.propertiesPage::-webkit-scrollbar{
+  width: 10px;
+  /* background-color: aqua; */
+}
+
+.propertiesPage::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
+}

@@ -1,0 +1,35 @@
+#animatedBackdrop{
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+    top:0; 
+    left:0; 
+    bottom:0; 
+    right:0; 
+}
+  
+#BackgroundLayer, #KonvaCanvas{
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+    top:0; 
+    left:0; 
+    bottom:0; 
+    right:0; 
+}
+
+#BackgroundLayer video,
+#BackgroundLayer img {
+    position: absolute;
+}
+
+#videoContent {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#imageContent {
+    width: 100%;
+    height: 100%;
+}

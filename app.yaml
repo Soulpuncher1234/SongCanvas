@@ -1,0 +1,11 @@
+runtime: nodejs18
+
+env_variables:
+  INSTANCE_CONNECTION_NAME: "songcanvas:us-west1:songcanvas-mysql"
+  DB_USER: "root"
+  DB_PASS: "songFanCanvas"
+  DB_NAME: "songCanvas"
+  DB_HOST: "34.168.103.146"
+  DB_PORT: "3306"
+  GOOGLE_CLOUD_PROJECT: "songcanvas"
+  GCLOUD_STORAGE_BUCKET: "songcanvas.appspot.com"

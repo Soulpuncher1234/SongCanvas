@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Konva Canvas Library -->
+        <script src="https://unpkg.com/konva@9.2.3/konva.min.js"></script>
+
+        <!-- Test gif images with gifler -->
+        <script src="https://unpkg.com/gifler@0.1.0/gifler.min.js"></script>
+
+        <!-- Include jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+        <!-- Added this for the Ajax server calls -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Added this to use seaweed script -->
+        <link href='https://fonts.googleapis.com/css?family=Seaweed Script' rel='stylesheet'>
+
+        <!-- Animated Backdrop -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <script>
+        tailwind.config = {
+            prefix: "tw-",
+            corePlugins: {
+                preflight: false,
+            }
+        }
+        </script>
+
+        <link rel="stylesheet" id="overlayOptionCSS"></link>
+    
+        <!-- Player Controller -->
+        <script type="module" src="/PlayerController.mjs"></script>
+
+        <!-- Player CSS -->
+        <link rel="stylesheet" href="/PlayerViews/Player.css"/>
+        
+    </head>
+    <body style="background-color: black;">
+        <div id="BackgroundLayer">
+            <img id="imageContent" onload="this.style.display='block'" onerror="this.style.display='none'">
+            <video id="videoContent"></video>
+        </div>
+
+        <div id="animatedBackdrop" style="opacity: 1; visibility: hidden;">
+            <ul class="circles">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+
+        <div id="KonvaCanvas">
+
+        </div>
+
+        <audio id="musicPlayer" preload="metadata">
+            <source id="musicSrc" type="audio/mpeg">
+        </audio>
+    </body>
+    
+</html>

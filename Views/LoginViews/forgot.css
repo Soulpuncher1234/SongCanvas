@@ -1,0 +1,129 @@
+.forget-password {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .forget-password .overlap-wrapper {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .forget-password .overlap {
+    position: relative;
+    height: 100%;
+    background-image: url(/images/forgot-password/backgroundphoto.jpg);
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+  
+  .forget-password .rectangle {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 17%;
+    left: 15%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    opacity: 0.9;
+  }
+  
+  .forget-password .submit-button {
+    position: absolute;
+    width: 327px;
+    height: 55px;
+    top: 78%;
+    left: 28%;
+  }
+  
+  .forget-password .overlap-group {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #6a00bf;
+    border-radius: 12px;
+  }
+  
+  .forget-password .text-wrapper {
+    position: absolute;
+    top: 31%;
+    left: 25%;
+    font-family: "Outfit-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .forget-password .email {
+    position: absolute;
+    width: 59%;
+    height: 8%;
+    top: 60%;
+    left: 20%;
+    box-shadow: inset 0px 4px 4px #00000040;
+  }
+  
+  .forget-password .email-textfield {
+    width: 59%;
+    height: 8%;
+  }
+  
+  .forget-password .div-wrapper {
+    position: relative;
+    width: 433px;
+    height: 66px;
+    background-color: #f6f6f6;
+    border-radius: 3px;
+    box-shadow: inset 2px 2px 4px #0000001f;
+  }
+  
+  .forget-password .div {
+    position: absolute;
+    width: 54%;
+    top: 35%;
+    left: 4%;
+    font-family: "Outfit-Regular", Helvetica;
+    font-weight: 400;
+    color: #7e7c7c;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .forget-password .header {
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    background-color: transparent;
+  }
+  
+  .forget-password .text-wrapper-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: "Port Lligat Sans-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 64px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .forget-password .p {
+    position: absolute;
+    width: 364px;
+    top: 116px;
+    left: 80%;
+    font-family: "Outfit-Regular", Helvetica;
+    font-weight: 400;
+    color: #5b5858;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+  }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Path to file-->      
+      <link rel="stylesheet" type="text/css" href="/LoginViews/login.css">
+<!-- Path to file-->      
+      <link rel="stylesheet" type="text/css" href="/LoginViews/login-globals.css">
+      <!-- Google Font for the Roboto Font -->
+      <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <!-- Google font for the heading -->
+      <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Kaisei+Decol:wght@500&family=Kalam:wght@300&display=swap" rel="stylesheet">     
+      <!-- Bootstrap -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">   
+
+    <!-- Jquery and AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- JS files -->
+    <script type="module" src="/LoginController.mjs"></script>
+      
+      <!-- link login js file functionality -->
+<!-- Path to file-->      
+      <script type="module" src="/LoginViews/login.js"></script>
+<!-- Path to file-->      
+      <script type="module" src="/LoginViews/PasswordInputToggle.js"></script>
+      <!-- Tab logo -->
+<!-- Path to file-->      
+      <link rel="icon" href="/mic.png">
+      <title>Login</title>
+      
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="login-anthony">
+                <div class="overlap"> 
+                    <div class="login-box">
+                        <div class="overlap-group">
+                            <div class="orange-box"></div>
+                            <div class="sign-up-create">
+                                <div class="overlap-3">
+                                    <!-- Brings user to a new page to create account -->
+                                    <div class="text-wrapper-5">
+<!-- Path to file-->                                        
+                                        <a href="/LoginViews/create.html">Create Account</a>
+                                    </div>
+                                    <div class="text-wrapper-6">New with us?</div>
+                                </div>
+                            </div>
+                            <div class="login">
+                                <!-- form  -->
+                                <form id="login-form">
+                                    <!-- Login Button -->
+                                    <!-- Username Textfield -->
+                                    <div class="overlap-5">
+                                        <div class="text-wrapper-9">
+                                            <input type="email" name= 'email' id="email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                     <!-- Password Textfield -->   
+                                    <div class="overlap-4">
+                                        <button class="eye-button" id="password-toggle"></button>
+                                        <div class="text-wrapper-8">
+                                            <input type="password" name='password' id="password" placeholder="Password">
+                                        </div>
+                                    </div> 
+                                    <button type="submit" class="div-wrapper">
+                                        <div class="text-wrapper-7">Login</div>
+                                    </button>                                                                  
+                                    <!-- </a> -->
+                                </form>
+                                <!-- Forgot Password Link-->
+                                <div class="text-wrapper-10">
+<!-- Path to file-->                                    
+                                    <a href="/LoginViews/forgot.html">Forgot Password?</a>
+                                </div>
+                            </div>
+                            <div class="heading-of-login">
+                                <div class="overlap-6">
+<!-- Path to file-->                                   
+                                    <img class="polygon" src="/mic_body.png" />
+                                    <div class="s-ngcanvas">S&nbsp;&nbsp;ngCanvas</div>
+<!-- Path to file-->                                    
+                                    <img class="polygon-2" src="/mic_head.png" />
+                                    <div class="rectangle-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
